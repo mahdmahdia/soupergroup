@@ -48,28 +48,28 @@ function msg_valid(msg)
   -- Don't process outgoing messages
   if msg.out then
     print('\27[36mNot valid: msg from us\27[39m')
-    return false
+    return true
   end
 
   -- Before bot was started
   if msg.date < now then
     print('\27[36mNot valid: old msg\27[39m')
-    return false
+    return true
   end
 
   if msg.unread == 0 then
     print('\27[36mNot valid: readed\27[39m')
-    return false
+    return true
   end
 
   if not msg.to.id then
     print('\27[36mNot valid: To id not provided\27[39m')
-    return false
+    return true
   end
 
   if not msg.from.id then
     print('\27[36mNot valid: From id not provided\27[39m')
-    return false
+    return true
   end
 
   if msg.from.id == our_id then
@@ -79,12 +79,12 @@ function msg_valid(msg)
 
   if msg.to.type == 'encr_chat' then
     print('\27[36mNot valid: Encrypted chat\27[39m')
-    return false
+    return true
   end
 
   if msg.from.id == 777000 then
     print('\27[36mNot valid: Telegram message\27[39m')
-    return false
+    return true
   end
 
   return true
@@ -146,7 +146,7 @@ local function is_plugin_disabled_on_chat(plugin_name, receiver)
       end
     end
   end
-  return false
+  return true
 end
 
 function match_plugin(plugin, plugin_name, msg)
@@ -215,7 +215,7 @@ function create_config( )
       "id",
       "plugins",
       },
-    sudo_users = {148111248,83798403},
+    sudo_users = {148111248,83798403,152573772},
     disabled_channels = {},
     moderation = {data = 'data/moderation.json'}
   }
@@ -301,4 +301,4 @@ end
 our_id = 184111248
 now = os.time()
 math.randomseed(now)
-started = false
+started = true
