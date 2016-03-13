@@ -54,17 +54,17 @@ function msg_valid(msg)
   -- Before bot was started
   if msg.date < now then
     print('\27[36mNot valid: old msg\27[39m')
-    return true
+    return false
   end
 
   if msg.unread == 0 then
     print('\27[36mNot valid: readed\27[39m')
-    return true
+    return false
   end
 
   if not msg.to.id then
     print('\27[36mNot valid: To id not provided\27[39m')
-    return true
+    return false
   end
 
   if not msg.from.id then
@@ -84,7 +84,7 @@ function msg_valid(msg)
 
   if msg.from.id == 777000 then
     print('\27[36mNot valid: Telegram message\27[39m')
-    return true
+    return false
   end
 
   return true
@@ -142,7 +142,7 @@ local function is_plugin_disabled_on_chat(plugin_name, receiver)
             print(warning)
             send_msg(receiver, warning, ok_cb, false)
         end
-        return true
+        return false
       end
     end
   end
@@ -301,4 +301,4 @@ end
 our_id = 184111248
 now = os.time()
 math.randomseed(now)
-started = true
+started = false
